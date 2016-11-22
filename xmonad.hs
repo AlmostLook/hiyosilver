@@ -33,8 +33,8 @@ myTerminal      = "urxvt"
 modMask' :: KeyMask
 modMask' = mod4Mask
 myWorkspaces    = ["Ξ" , "Φ", "~"] ++ ["α", "β"]
-myXmonadBar = "dzen2 -x '0' -y '0' -h '24' -w '698' -ta 'l' -fn '-*-Liberation mono-*-r-normal-*-*-110-*-*-*-*-iso8859-*' -fg '#FFFFFF' -bg '#1B1D1E'"
-myStatusBar = "conky -c /home/x4w3/.xmonad/.conky_dzen | dzen2 -x '650' -y '0' -w '452' -h '24' -ta 'r' -fn '-*-inconsolata-*-r-normal-*-*-120-*-*-*-*-iso8859-*' -bg '#1B1D1E' -fg '#FFFFFF'"
+myXmonadBar = "dzen2 -x '0' -y '0' -h '24' -w '650' -ta 'l' -fn '-*-Liberation mono-*-r-normal-*-*-110-*-*-*-*-iso8859-*' -fg '#FFFFFF' -bg '#1B1D1E'"
+myStatusBar = "conky -c /home/x4w3/.xmonad/.conky_dzen | dzen2 -x '650' -y '0' -w '480' -h '24' -ta 'r' -fn '-*-Liberation Mono-*-r-normal-*-*-110-*-*-*-*-iso8859-*' -bg '#1B1D1E' -fg '#FFFFFF'"
 myBitmapDir = "/home/x4w3/.xmonad/dzen2"
 
 main = do
@@ -142,7 +142,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0,                          xK_Print    ), spawn "/home/x4w3/imgur-screenshot/imgur-screenshot.sh")
     , ((modMask,		    xK_c        ), spawn "chromium")
     , ((modMask, 		    xK_s	), spawn "/usr/bin/subl")
-    , ((modMask,                    xK_e        ), spawn "/usr/bin/thunar")
+    , ((modMask,                    xK_e        ), spawn "thunar &")
     , ((0,                          0x1008ff12  ), spawn "amixer -q sset Headphone toggle")
     , ((0,                          0x1008ff11  ), spawn "amixer -q sset Headphone 5%-")   
     , ((0,                          0x1008ff13  ), spawn "amixer -q sset Headphone 5%+")   
