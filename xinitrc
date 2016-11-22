@@ -16,19 +16,20 @@ xsetroot -cursor_name left_ptr &
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
 #notify
-exec trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 14 --height 24 --transparent true --alpha 0 --padding 2 --tint 0x1b1d1e &
+trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 14 --height 24 --transparent true --alpha 0 --padding 2 --tint 0x1b1d1e &
 
-exec xscreensaver -no-splash &
-exec feh --bg-scale /home/x4w3/black-wallpaper-19.jpg &
+mpd /home/x4w3/.mpd/mpd.conf
+xscreensaver -no-splash &
+feh --bg-scale /home/x4w3/black-wallpaper-19.jpg &
 
 if [ -x /usr/bin/nm-applet ] ; then
 	nm-applet --sm-disable &
 fi
 
-exec volumeicon &
-exec xfce4-power-manager & 
-exec dropbox &
-exec xfce4-clipman &
+volumeicon &
+xfce4-power-manager & 
+dropbox &
+xfce4-clipman &
 
 #play
 exec xmonad
