@@ -33,8 +33,8 @@ myTerminal      = "urxvt"
 modMask' :: KeyMask
 modMask' = mod4Mask
 myWorkspaces    = ["Ξ" , "Φ", "~"] ++ ["α", "β"]
-myXmonadBar = "dzen2 -x '0' -y '0' -h '24' -w '650' -ta 'l' -fn '-*-Liberation mono-*-r-normal-*-*-110-*-*-*-*-iso8859-*' -fg '#FFFFFF' -bg '#1B1D1E'"
-myStatusBar = "conky -c /home/x4w3/.xmonad/.conky_dzen | dzen2 -x '650' -y '0' -w '480' -h '24' -ta 'r' -fn '-*-Liberation Mono-*-r-normal-*-*-110-*-*-*-*-iso8859-*' -bg '#1B1D1E' -fg '#FFFFFF'"
+myXmonadBar = "dzen2 -x '0' -y '0' -h '28' -w '670' -ta 'l' -fn '-*-Liberation mono-*-r-normal-*-*-120-*-*-*-*-iso8859-*' -fg '#FFFFFF' -bg '#1B1D1E'"
+myStatusBar = "conky -c /home/x4w3/.xmonad/.conky_dzen | dzen2 -x '670' -y '0' -w '565' -h '28' -ta 'r' -fn '-*-Liberation Mono-*-r-normal-*-*-120-*-*-*-*-iso8859-*' -bg '#1B1D1E' -fg '#FFFFFF'"
 myBitmapDir = "/home/x4w3/.xmonad/dzen2"
 
 main = do
@@ -57,10 +57,8 @@ main = do
 myManageHook :: ManageHook
 myManageHook = composeAll
                 [ className =? "urxvt"     --> doShift "Ξ"
-                , className =? "Thunar"           --> doShift "Ξ"
                 , className =? "Chromium"       --> doShift "Φ"
-                , className =? "subl"        --> doShift "Φ"
-                , className =? "weechat"         --> doShift "~"
+                , className =? "subl3"        --> doShift "Ξ"
                 , className =? "trayer"         --> doIgnore
                 , isFullscreen                  --> (doF W.focusDown <+> doFullFloat)
                 , manageDocks]
@@ -111,9 +109,9 @@ colorYellow         = "#E6DB74"
 colorWhite          = "#CCCCC6"
 colorNormalBorder   = "#CCCCC6"
 colorFocusedBorder  = "#fd971f"
-barFont  = "Liberation mono:size=14"
-barXFont = "Liberation mono:size=14"
-xftFont = "xft:Liberation mono-12"
+barFont  = "Liberation mono:size=16"
+barXFont = "Liberation mono:size=16"
+xftFont = "xft:Liberation mono-14"
 
 mXPConfig :: XPConfig
 mXPConfig =
@@ -124,14 +122,14 @@ mXPConfig =
                     , bgHLight              = colorGreen
                     , fgHLight              = colorDarkGray
                     , promptBorderWidth     = 0
-                    , height                = 16
+                    , height                = 18
                     , historyFilter         = deleteConsecutive
                     }
  
 largeXPConfig :: XPConfig
 largeXPConfig = mXPConfig
                 { font = xftFont
-                , height = 16
+                , height = 18
                 }
 
 keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
@@ -141,8 +139,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask,      xK_l        ), spawn "xscreesaver-command -lock")
     , ((0,                          xK_Print    ), spawn "/home/x4w3/imgur-screenshot/imgur-screenshot.sh")
     , ((modMask,		    xK_c        ), spawn "chromium")
-    , ((modMask, 		    xK_s	), spawn "/usr/bin/subl")
-    , ((modMask,                    xK_e        ), spawn "thunar &")
+    , ((modMask, 		    xK_s	), spawn "subl3")
+    , ((modMask,                    xK_x        ), spawn "thunare &")
     , ((0,                          0x1008ff12  ), spawn "amixer -q sset Headphone toggle")
     , ((0,                          0x1008ff11  ), spawn "amixer -q sset Headphone 5%-")   
     , ((0,                          0x1008ff13  ), spawn "amixer -q sset Headphone 5%+")   
