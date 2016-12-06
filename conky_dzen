@@ -1,0 +1,9 @@
+background yes
+out_to_console yes
+out_to_x no
+update_interval 1
+
+TEXT
+^fg(\#808080)^i(/home/x4w3/.xmonad/dzen2/temp.xbm) ^fg(\#FFFFFF)${acpitemp}* ^fg(\#808080)^i(/home/x4w3/.xmonad/dzen2/cpu.xbm) ^fg(\#FFFFFF)${cpu}% ^fg(\#808080)^i(/home/x4w3/.xmonad/dzen2/mem.xbm) ^fg(\#FFFFFF)${memperc}% ^fg(\#808080)^i(/home/x4w3/.xmonad/dzen2/net_down_03.xbm) ^fg(\#FFFFFF)${downspeedf wlp16s0} ^fg(\#808080)^i(/home/x4w3/.xmonad/dzen2/net_up_03.xbm) ^fg(\#FFFFFF)${upspeedf wlp16s0} ^fg(\#808080)^i(/home/x4w3/.xmonad/dzen2/clock.xbm) ^fg(\#FFFFFF)${time %d %b} ${time %R} ^fg(\#808080)^i(/home/x4w3/.xmonad/dzen2/battery.xbm) ^fg(\#FFFFFF)${battery_percent C23B}%
+
+
