@@ -2,5 +2,5 @@
 
 while true; do
   xdotool key Control_L 
-  sleep 2
+  sleep 1
 done
