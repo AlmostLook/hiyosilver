@@ -1,9 +1,9 @@
-background yes
+# conky rc by x4u3n #
+background no
 out_to_console yes
 out_to_x no
-update_interval 1
+update_interval 1.0
 
 TEXT
-^fg(\#808080)^i(/home/x4w3/.xmonad/dzen2/temp.xbm) ^fg(\#FFFFFF)${acpitemp}* ^fg(\#808080)^i(/home/x4w3/.xmonad/dzen2/cpu.xbm) ^fg(\#FFFFFF)${cpu}% ^fg(\#808080)^i(/home/x4w3/.xmonad/dzen2/mem.xbm) ^fg(\#FFFFFF)${memperc}% ^fg(\#808080)^i(/home/x4w3/.xmonad/dzen2/net_down_03.xbm) ^fg(\#FFFFFF)${downspeedf wlp16s0} ^fg(\#808080)^i(/home/x4w3/.xmonad/dzen2/net_up_03.xbm) ^fg(\#FFFFFF)${upspeedf wlp16s0} ^fg(\#808080)^i(/home/x4w3/.xmonad/dzen2/clock.xbm) ^fg(\#FFFFFF)${time %d %b} ${time %R} ^fg(\#808080)^i(/home/x4w3/.xmonad/dzen2/battery.xbm) ^fg(\#FFFFFF)${battery_percent C23B}%
 
-
+^fg(\#fe654d)${mpd_status} >> ^fg(\#FFFFFF)${mpd_artist}^fg(\#fe654d) - ^fg(\#FFFFFF)${mpd_title}^fg(\#fe654d) << ^fg(\#808080)${mpd_elapsed}/^fg(\#808080)${mpd_length}^fg(\#fe654d)                 ^i(/home/n3w4x/.xmonad/dzen2/cpu.xbm)^fg(\#FFFFFF) ${cpu} ^fg(\#fe654d)^i(/home/n3w4x/.xmonad/dzen2/mem.xbm) ^fg(\#FFFFFF)${memperc} ^fg(\#fe654d)^i(/home/n3w4x/.xmonad/dzen2/net_down_03.xbm) ^fg(\#FFFFFF)${downspeedf enp3s0} ^fg(\#fe654d) ^i(/home/n3w4x/.xmonad/dzen2/net_up_03.xbm) ^fg(\#FFFFFF)${upspeedf enp3s0} ^fg(\#fe654d)        ^i(/home/n3w4x/.xmonad/dzen2/clock.xbm)^fg(\#FFFFFF) ${time %d %b} ${time %R}
