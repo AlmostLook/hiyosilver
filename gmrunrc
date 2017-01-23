@@ -1,0 +1,16 @@
+# Set window geometry
+Width = 1000
+Top = 50
+Left = 1250
+
+URL_cc =`/usr/bin/chromium -P 2`                         #type cc:
+
+Terminal = urxvt-unicode                               #type ctrl-enter
+TermExec = urxvt-unicode -e
+URL_http = /usr/bin/chromium %u
+URL_https = /usr/bin/chromium %u
+URL_uc = /usr/bin/chromium http://ubuntuforums.org/      #type uc://
+URL_mail = /usr/bin/chromium https://mail.google.com/    #type mail://
+
+URL_top = ${TermExec} '%s'                    #type [command] ctrl-enter
+URL_mc = ${TermExec} '%s'
