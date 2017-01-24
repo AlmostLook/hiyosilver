@@ -33,8 +33,8 @@ myTerminal      = "urxvt"
 modMask' :: KeyMask
 modMask' = mod4Mask
 myWorkspaces    = ["I" , "II", "III"] ++ ["IV", "V"]
-myXmonadBar = "dzen2 -x '0' -y '0' -h '25' -w '650' -ta 'l' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -fg '#FFFFFF' -bg '#1B1D1E' -e 'button'"
-myStatusBar = "conky -c /home/n3w4x/.xmonad/.conky_dzen | dzen2 -x '650' -y '0' -w '1040' -h '25' -ta 'r' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -bg '#1B1D1E' -fg '#FFFFFF' -e 'button'"
+myXmonadBar = "dzen2 -x '0' -y '0' -h '25' -w '650' -ta 'l' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -fg '#ffffff' -bg '#1B1D1E' -e 'button'"
+myStatusBar = "conky -c /home/n3w4x/.xmonad/.conky_dzen | dzen2 -x '650' -y '0' -w '1040' -h '25' -ta 'r' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -bg '#1B1D1E' -fg '#ffffff' -e 'button'"
 myBitmapDir = "/home/n3w4x/.xmonad/dzen2"
 
 main = do
@@ -48,8 +48,8 @@ main = do
       , layoutHook          = layoutHook'
       , manageHook          = manageDocks <+> myManageHook <+> manageHook defaultConfig
       , logHook             = myLogHook dzenLeftBar >> fadeInactiveLogHook 0xdddddddd
-      , normalBorderColor   = "#1B1D1E"
-      , focusedBorderColor  = "#fe654d" 
+      , normalBorderColor   = "#ffffff"
+      , focusedBorderColor  = "#ff5f00" 
       , borderWidth         = 1
       , startupHook         = setWMName "LG3D"
 }
@@ -72,14 +72,14 @@ layoutHook'  =  onWorkspaces ["1"] customLayout $
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ defaultPP
     {
-        ppCurrent           =   dzenColor "#fe654d" "#1B1D1E" . pad
+        ppCurrent           =   dzenColor "#ff5f00" "#1B1D1E" . pad
       , ppVisible           =   dzenColor "white" "#1B1D1E" . pad
       , ppHidden            =   dzenColor "white" "#1B1D1E" . pad
       , ppHiddenNoWindows   =   dzenColor "#7b7b7b" "#1B1D1E" . pad
       , ppUrgent            =   dzenColor "black" "red" . pad
       , ppWsSep             =   ""
       , ppSep               =   " "
-      , ppLayout            =   dzenColor "#fe654d" "#1B1D1E" .
+      , ppLayout            =   dzenColor "#ff5f00" "#1B1D1E" .
                                 (\x -> case x of
                                     "ResizableTall"             ->      "^i(" ++ myBitmapDir ++ "/tall.xbm)"
                                     "Mirror ResizableTall"      ->      "^i(" ++ myBitmapDir ++ "/mtall.xbm)"
@@ -104,8 +104,8 @@ mXPConfig =
     defaultXPConfig { font                  = "xft:inconsolata-16"
  
                     , bgColor               = "#2b2d2e"
-                    , fgColor               = "#fe654d"
-                    , bgHLight              = "#fe654d"
+                    , fgColor               = "#ff5f00"
+                    , bgHLight              = "#ff5f00"
                     , fgHLight              = "#1B1D1E"
                     , promptBorderWidth     = 0
                     , height                = 17
@@ -125,7 +125,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,		                xK_c        ), spawn "chromium")
     , ((modMask,                    xK_s	      ), spawn "scrot.sh")
     , ((modMask,                    xK_x        ), spawn "thunar")
-    , ((modMask,					xK_F2		), spawn "gmrun")  
+    , ((modMask,					xK_F2		), spawn "gmrun")
+	, ((modMask,					xK_o		), spawn "/usr/bin/libreoffice --writer")
     , ((modMask,                    xK_space    ), sendMessage NextLayout)
     , ((modMask .|. shiftMask,      xK_space    ), setLayout $ XMonad.layoutHook conf)
     , ((modMask,                    xK_b        ), sendMessage ToggleStruts)

@@ -31,5 +31,5 @@ URxvt.font: 			xft:Inconsolata-14
 URxvt.boldFont:			xft:Inconsolata:bold-14
 URxvt.background:       	#000000
 URxvt.foreground:       	#ffffff
-URxvt.cursorColor:      	#e95420
-URxvt.underlineColor:   	#e95420
+URxvt.cursorColor:      	#ff5f00
+URxvt.underlineColor:   	#ff5f00
