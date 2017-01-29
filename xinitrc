@@ -33,6 +33,8 @@ volumeicon &
 xfce4-power-manager & 
 dropbox &
 xfce4-clipman &
+tomboy &
+orage &
 
 #play
 exec xmonad
