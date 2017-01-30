@@ -36,6 +36,7 @@ xfce4-clipman &
 tomboy &
 orage &
 pidgin &
+mpdstat_pidgin &
 
 #play
 exec xmonad
