@@ -35,6 +35,7 @@ dropbox &
 xfce4-clipman &
 tomboy &
 orage &
+pidgin &
 
 #play
 exec xmonad
