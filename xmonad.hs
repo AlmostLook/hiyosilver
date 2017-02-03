@@ -15,9 +15,9 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.EwmhDesktops
-import XMonad.Layout.NoBorders
-import XMonad.Layout.PerWorkspace (onWorkspace)
-import XMonad.Layout.Reflect
+import XMonad.Layout.NoBorders (noBorders, smartBorders)
+import XMonad.Layout.PerWorkspace (onWorkspace, onWorkspaces)
+import XMonad.Layout.Reflect (reflectHoriz)
 import XMonad.Layout.IM
 import XMonad.Layout.SimpleFloat
 import XMonad.Layout.Spacing
@@ -25,9 +25,7 @@ import XMonad.Layout.ResizableTile
 import XMonad.Layout.LayoutHints
 import XMonad.Layout.LayoutModifier
 import XMonad.Layout.Grid
-import XMonad.Layout.Fullscreen
-import Xmonad.Layout.ToggleLayouts
-import Xmonad.Layout.WindowNavigation 
+import XMonad.Layout.ToggleLayouts
 import Data.Ratio ((%))
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
@@ -59,12 +57,12 @@ main = do
 
 myManageHook :: ManageHook
 myManageHook = composeAll
-                [ className =? "urxvt"     --> doShift "I"
-                , className =? "Chromium"       --> doShift "II"
-                , className =? "libreoffice --writer" --> doShift "III"
-                , className =? "trayer"         --> doIgnore
-				, className =? "steam" --> doCenterFloat
-                , isFullscreen                  --> (doF W.focusDown <+> doFullFloat)
+                [ className =? "urxvt"					--> doShift "I"
+                , className =? "Chromium"				--> doShift "II"
+                , className =? "libreoffice --writer"	--> doShift "III"
+                , className =? "trayer"					--> doIgnore
+				, className =? "steam"					--> doCenterFloat
+                , isFullscreen							--> (doF W.focusDown <+> doFullFloat)
                 , manageDocks]
 
 myDoFullFloat :: ManageHook
@@ -126,8 +124,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask,                    xK_p        ), runOrRaisePrompt largeXPConfig)
     , ((modMask .|. shiftMask,      xK_Return   ), spawn $ XMonad.terminal conf)    
     , ((modMask .|. shiftMask,      xK_l        ), spawn "xscreesaver-command -lock")
-    , ((modMask,		                xK_c        ), spawn "chromium")
-    , ((modMask,                    xK_s	      ), spawn "scrot.sh")
+    , ((modMask,		            xK_c        ), spawn "chromium")
+    , ((modMask,                    xK_s	    ), spawn "scrot.sh")
     , ((modMask,                    xK_x        ), spawn "thunar")
     , ((modMask,					xK_F2		), spawn "gmrun")
 	, ((modMask,					xK_o		), spawn "/usr/bin/libreoffice --writer")
