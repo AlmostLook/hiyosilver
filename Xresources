@@ -1,34 +1,31 @@
 !General
-URxvt.title:			rxvt-unicode
-URxvt.termName: 		xterm-256color
-URxvt.buffered:			true
-URxvt.saveLines:		1024
-URxvt.scrollBar:		false
-URxvt.scrollstyle:		rxvt
-URxvt.transparent:		true
-URxvt.shading:			50
-URxvt.urgentOnBell:		true
-URxvt.cursorBlink:		true
-URxvt.inheritPixmap:    true
+URxvt.title:				rxvt-unicode
+URxvt.termName:				xterm-256color
+URxvt.buffered:				true
+URxvt.saveLines:			1024
+URxvt.scrollBar:			false
+URxvt.scrollstyle:			rxvt
+URxvt.transparent:			true
+URxvt.shading:				75
+URxvt.urgentOnBell:			true
+URxvt.cursorBlink:			true
+URxvt.inheritPixmap:		true
 URxvt.intensityStyles: 		true
-URxvt.perl-ext-common:		default,selection-to-clipboard,url-select,keyboard-select
-URxvt.url-select.launcher:  	chromium
-URxvt.url-select.underline: 	true
-!URxvt.keysym.M-c:   perl:clipboard:copy
-!URxvt.keysym.M-v:   perl:clipboard:paste
-!URxvt.perl-ext-common: selection-to-clipboard
-
-URxvt.keysym.M-u:           	perl:url-select:select_next
-URxvt.keysym.M-Escape:      	perl:keyboard-select:activate
-URxvt.keysym.M-s:           	perl:keyboard-select:search
+URxvt.perl-ext-common:		default,url-select,clipboard
+URxvt.url-select.launcher:  chromium
+URxvt.url-select.underline: true
+URxvt.keysym.M-c:			perl:clipboard:copy
+URxvt.keysym.M-v:			perl:clipboard:paste
+URxvt.keysym.M-u:           perl:url-select:select_next
+URxvt.keysym.M-Escape:      perl:keyboard-select:activate
+URxvt.keysym.M-s:           perl:keyboard-select:search
 URxvt.underlineURLs:		true
-URxvt.urlButton:		1
-URxvt.internalBorder:  10
-
-!Fuentes
-URxvt.letterSpace:		0
-URxvt.font: 			xft:Inconsolata-14
-URxvt.boldFont:			xft:Inconsolata:bold-14
+URxvt.urlButton:			1
+URxvt.internalBorder:		10
+!Personal
+URxvt.letterSpace:			0
+URxvt.font:					xft:Inconsolata-14
+URxvt.boldFont:				xft:Inconsolata:bold-14
 URxvt.background:       	#000000
 URxvt.foreground:       	#ffffff
 URxvt.cursorColor:      	#ff5f00
