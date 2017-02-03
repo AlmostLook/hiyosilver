@@ -15,9 +15,9 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.EwmhDesktops
-import XMonad.Layout.NoBorders (smartBorders, noBorders)
-import XMonad.Layout.PerWorkspace (onWorkspace, onWorkspaces)
-import XMonad.Layout.Reflect (reflectHoriz)
+import XMonad.Layout.NoBorders
+import XMonad.Layout.PerWorkspace (onWorkspace)
+import XMonad.Layout.Reflect
 import XMonad.Layout.IM
 import XMonad.Layout.SimpleFloat
 import XMonad.Layout.Spacing
@@ -25,6 +25,9 @@ import XMonad.Layout.ResizableTile
 import XMonad.Layout.LayoutHints
 import XMonad.Layout.LayoutModifier
 import XMonad.Layout.Grid
+import XMonad.Layout.Fullscreen
+import Xmonad.Layout.ToggleLayouts
+import Xmonad.Layout.WindowNavigation 
 import Data.Ratio ((%))
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
@@ -58,8 +61,9 @@ myManageHook :: ManageHook
 myManageHook = composeAll
                 [ className =? "urxvt"     --> doShift "I"
                 , className =? "Chromium"       --> doShift "II"
-                , className =? "subl3"        --> doShift "I"
+                , className =? "libreoffice --writer" --> doShift "III"
                 , className =? "trayer"         --> doIgnore
+				, className =? "steam" --> doCenterFloat
                 , isFullscreen                  --> (doF W.focusDown <+> doFullFloat)
                 , manageDocks]
 
