@@ -1,4 +1,5 @@
 #!/bin/bash
+export DISPLAY=:0.0
 while : ; do
      
 	mpc idle &> /dev/null

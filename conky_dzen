@@ -1,9 +1,9 @@
-# conky rc by x4u3n #
-background no
-out_to_console yes
-out_to_x no
-update_interval 1.0
+conky.config = {
+background = false,
+out_to_console = true,
+out_to_x = false,
+update_interval = 1.0};
 
-TEXT
-
-^fg(\#ff5f00)${mpd_status} >> ^fg(\#FFFFFF)${mpd_artist}^fg(\#ff5f00) - ^fg(\#FFFFFF)${mpd_title}^fg(\#ff5f00) << ^fg(\#808080)${mpd_elapsed}/^fg(\#808080)${mpd_length}^fg(\#ff5f00)   ^i(/home/n3w4x/.xmonad/dzen2/cpu.xbm)^fg(\#FFFFFF) ${cpu} ^fg(\#ff5f00)^i(/home/n3w4x/.xmonad/dzen2/mem.xbm) ^fg(\#FFFFFF)${memperc} ^fg(\#ff5f00)^i(/home/n3w4x/.xmonad/dzen2/net_down_03.xbm) ^fg(\#FFFFFF)${downspeedf enp3s0} ^fg(\#ff5f00) ^i(/home/n3w4x/.xmonad/dzen2/net_up_03.xbm) ^fg(\#FFFFFF)${upspeedf enp3s0} ^fg(\#ff5f00)  ^i(/home/n3w4x/.xmonad/dzen2/clock.xbm)^fg(\#ff5f00) ${time %r}
+conky.text = [[
+^fg(\#ff5f00)${mpd_status} >> ^fg(\#FFFFFF)${mpd_artist}^fg(\#ff5f00) - ^fg(\#FFFFFF)${mpd_title}^fg(\#ff5f00) << ^fg(\#808080)${mpd_elapsed}/^fg(\#808080)${mpd_length}^fg(\#ff5f00) ^i(/home/n3w4x/.xmonad/dzen2/temp.xbm)^fg(\#FFFFFF) ${execi 60 sensors | grep "temp1:" |cut -d "+" -f2| cut -c1-4} ${execi 60 nvidia-settings -query [gpu:0]/GPUCoreTemp -t} ${execi 60 sudo hddtemp /dev/sda -n} ${execi 60 sudo hddtemp /dev/sdb -n} ^fg(\#ff5f00)^i(/home/n3w4x/.xmonad/dzen2/cpu.xbm)^fg(\#FFFFFF) ${cpu} ^fg(\#ff5f00)^i(/home/n3w4x/.xmonad/dzen2/mem.xbm) ^fg(\#FFFFFF)${memperc} ^fg(\#ff5f00)^i(/home/n3w4x/.xmonad/dzen2/net_down_03.xbm)^fg(\#FFFFFF) ${downspeedf enp3s0} ^fg(\#ff5f00)^i(/home/n3w4x/.xmonad/dzen2/net_up_03.xbm) ^fg(\#FFFFFF)${upspeedf enp3s0} ^fg(\#ff5f00) ^i(/home/n3w4x/.xmonad/dzen2/clock.xbm)^fg(\#ff5f00) ${execi 30 /home/n3w4x/weather.sh "EUR|ES|AN|seville"} ^fg(\#FFFFFF) ${time %H:%M %S}
+]];

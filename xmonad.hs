@@ -34,8 +34,8 @@ myTerminal      = "urxvt"
 modMask' :: KeyMask
 modMask' = mod4Mask
 myWorkspaces    = ["I" , "II", "III"] ++ ["IV", "V"]
-myXmonadBar = "dzen2 -x '0' -y '0' -h '25' -w '650' -ta 'l' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -fg '#ffffff' -bg '#1B1D1E' -e 'button'"
-myStatusBar = "conky -c /home/n3w4x/.xmonad/.conky_dzen | dzen2 -x '650' -y '0' -w '1040' -h '25' -ta 'r' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -bg '#1B1D1E' -fg '#ffffff' -e 'button'"
+myXmonadBar = "dzen2 -x '0' -y '0' -h '25' -w '450' -ta 'l' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -fg '#ffffff' -bg '#1B1D1E' -e 'button'"
+myStatusBar = "conky -c /home/n3w4x/.xmonad/.conky_dzen | dzen2 -x '450' -y '0' -w '1240' -h '25' -ta 'r' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -bg '#1B1D1E' -fg '#ffffff' -e 'button'"
 myBitmapDir = "/home/n3w4x/.xmonad/dzen2"
 
 main = do
@@ -57,12 +57,13 @@ main = do
 
 myManageHook :: ManageHook
 myManageHook = composeAll
-                [ className =? "urxvt"					--> doShift "I"
-                , className =? "Chromium"				--> doShift "II"
+                [ className =? "urxvt"			--> doShift "I"
+                , className =? "Chromium"		--> doShift "II"
                 , className =? "libreoffice --writer"	--> doShift "III"
-                , className =? "trayer"					--> doIgnore
-				, className =? "steam"					--> doCenterFloat
-                , isFullscreen							--> (doF W.focusDown <+> doFullFloat)
+                , className =? "trayer"			--> doIgnore
+		, className =? "steam"			--> doCenterFloat
+                , className =? "manaplus"		--> doCenterFloat
+		, isFullscreen				--> (doF W.focusDown <+> doFullFloat)
                 , manageDocks]
 
 myDoFullFloat :: ManageHook
