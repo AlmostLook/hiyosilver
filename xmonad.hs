@@ -33,7 +33,7 @@ import qualified Data.Map as M
 myTerminal      = "urxvt"
 modMask' :: KeyMask
 modMask' = mod4Mask
-myWorkspaces    = ["I" , "II", "III"] ++ ["IV", "V"]
+myWorkspaces    = ["^i(" ++ myBitmapDir ++ "/arch_10x10.xbm)" , "II", "III"] ++ ["IV", "V"]
 myXmonadBar = "dzen2 -x '0' -y '0' -h '25' -w '450' -ta 'l' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -fg '#ffffff' -bg '#1B1D1E' -e 'button'"
 myStatusBar = "conky -c /home/n3w4x/.xmonad/.conky_dzen | dzen2 -x '450' -y '0' -w '1240' -h '25' -ta 'r' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -bg '#1B1D1E' -fg '#ffffff' -e 'button'"
 myBitmapDir = "/home/n3w4x/.xmonad/dzen2"
@@ -58,11 +58,15 @@ main = do
 myManageHook :: ManageHook
 myManageHook = composeAll
                 [ className =? "urxvt"			--> doShift "I"
-                , className =? "Chromium"		--> doShift "II"
+                , className =? "chromium"		--> doShift "II"
+		, className =? "firefox"		--> doShift "II"
                 , className =? "libreoffice --writer"	--> doShift "III"
+		, className =? "vlc"			--> doCenterFloat 
                 , className =? "trayer"			--> doIgnore
-		, className =? "steam"			--> doCenterFloat
-                , className =? "manaplus"		--> doCenterFloat
+		, className =? "Steam"			--> doCenterFloat
+                , className =? "manaplus"		--> doCenterFloat 
+		, className =? "Tomboy" 		--> doFloat
+    		, className =? "Keepasx"		 --> doFloat
 		, isFullscreen				--> (doF W.focusDown <+> doFullFloat)
                 , manageDocks]
 
@@ -124,12 +128,13 @@ largeXPConfig = mXPConfig
 keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask,                    xK_p        ), runOrRaisePrompt largeXPConfig)
     , ((modMask .|. shiftMask,      xK_Return   ), spawn $ XMonad.terminal conf)    
-    , ((modMask .|. shiftMask,      xK_l        ), spawn "xscreesaver-command -lock")
-    , ((modMask,		            xK_c        ), spawn "chromium")
-    , ((modMask,                    xK_s	    ), spawn "scrot.sh")
+    , ((modMask .|. shiftMask,      xK_l        ), spawn "slock")
+    , ((modMask,                    xK_c        ), spawn "chromium https://mail.google.com/")
+    , ((modMask,                    xK_f        ), spawn "firefox")
+    , ((modMask,                    xK_s        ), spawn "scrot.sh")
     , ((modMask,                    xK_x        ), spawn "thunar")
-    , ((modMask,					xK_F2		), spawn "gmrun")
-	, ((modMask,					xK_o		), spawn "/usr/bin/libreoffice --writer")
+    , ((modMask,                    xK_F2       ), spawn "gmrun")
+    , ((modMask,                    xK_o        ), spawn "/usr/bin/libreoffice --writer")
     , ((modMask,                    xK_space    ), sendMessage NextLayout)
     , ((modMask .|. shiftMask,      xK_space    ), setLayout $ XMonad.layoutHook conf)
     , ((modMask,                    xK_b        ), sendMessage ToggleStruts)
@@ -143,15 +148,19 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                    xK_t        ), withFocused $ windows . W.sink)
     , ((modMask,                    xK_h        ), sendMessage Shrink)
     , ((modMask,                    xK_l        ), sendMessage Expand)
+    , ((modMask .|. controlMask,    xK_h        ), sendMessage MirrorShrink)
+    , ((modMask .|. controlMask,    xK_l        ), sendMessage MirrorExpand)
     , ((modMask,                    xK_comma    ), sendMessage (IncMasterN 1))
     , ((modMask,                    xK_period   ), sendMessage (IncMasterN (-1)))
+    , ((modMask,                    xK_i        ), sendMessage ToggleLayout)
     , ((modMask .|. controlMask,    xK_Right    ), nextWS)
     , ((modMask .|. shiftMask,      xK_Right    ), shiftToNext)
     , ((modMask .|. controlMask,    xK_Left     ), prevWS)
     , ((modMask .|. shiftMask,      xK_Left     ), shiftToPrev)
+    , ((modMask .|. controlMask,    xK_r        ), spawn "sleep 3 && systemctl reboot")
     , ((modMask .|. shiftMask,      xK_c        ), kill)
     , ((modMask .|. shiftMask,      xK_q        ), io (exitWith ExitSuccess))
-    , ((modMask,                    xK_q        ), spawn "pkill conky && xmonad --recompile && xmonad --restart")
+    , ((modMask,                    xK_q        ), spawn "pkill conky && killall dzen2 && xmonad --recompile && xmonad --restart")
     ]
 
     ++
