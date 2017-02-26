@@ -30,10 +30,10 @@ import Data.Ratio ((%))
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 
-myTerminal      = "urxvt"
-modMask' :: KeyMask
-modMask' = mod4Mask
-myWorkspaces    = ["^i(" ++ myBitmapDir ++ "/arch_10x10.xbm)" , "II", "III"] ++ ["IV", "V"]
+myTerminal = "urxvt"
+myModMask :: KeyMask
+myModMask = mod4Mask
+myWorkspaces = ["^i(" ++ myBitmapDir ++ "/arch_10x10.xbm)" , "II", "III"] ++ ["IV", "V"]
 myXmonadBar = "dzen2 -x '0' -y '0' -h '25' -w '450' -ta 'l' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -fg '#ffffff' -bg '#1B1D1E' -e 'button'"
 myStatusBar = "conky -c /home/n3w4x/.xmonad/.conky_dzen | dzen2 -x '450' -y '0' -w '1240' -h '25' -ta 'r' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -bg '#1B1D1E' -fg '#ffffff' -e 'button'"
 myBitmapDir = "/home/n3w4x/.xmonad/dzen2"
@@ -41,12 +41,12 @@ myBitmapDir = "/home/n3w4x/.xmonad/dzen2"
 main = do
     dzenLeftBar <- spawnPipe myXmonadBar
     dzenRightBar <- spawnPipe myStatusBar
-    xmonad $ withUrgencyHookC dzenUrgencyHook { args = ["-bg", "red", "fg", "black", "-xs", "1", "-y", "25"] } urgencyConfig { remindWhen = Every 15 } $ defaultConfig
+    xmonad $ withUrgencyHookC dzenUrgencyHook { args = ["-bg", "red", "fg", "black", "-xs", "1", "-y", "25"] } urgencyConfig { remindWhen = Every 5 } $ defaultConfig
       { terminal            = myTerminal
       , workspaces          = myWorkspaces
-      , keys                = keys'
-      , modMask             = modMask'
-      , layoutHook          = layoutHook'
+      , keys                = myKeys
+      , modMask             = myModMask
+      , layoutHook          = myLayoutHook
       , manageHook          = manageDocks <+> myManageHook <+> manageHook defaultConfig
       , logHook             = myLogHook dzenLeftBar >> fadeInactiveLogHook 0xdddddddd
       , normalBorderColor   = "#000000"
@@ -57,24 +57,21 @@ main = do
 
 myManageHook :: ManageHook
 myManageHook = composeAll
-                [ className =? "urxvt"			--> doShift "I"
-                , className =? "chromium"		--> doShift "II"
-		, className =? "firefox"		--> doShift "II"
-                , className =? "libreoffice --writer"	--> doShift "III"
-		, className =? "vlc"			--> doCenterFloat 
-                , className =? "trayer"			--> doIgnore
-		, className =? "Steam"			--> doCenterFloat
-                , className =? "manaplus"		--> doCenterFloat 
-		, className =? "Tomboy" 		--> doFloat
-    		, className =? "Keepasx"		 --> doFloat
-		, isFullscreen				--> (doF W.focusDown <+> doFullFloat)
+                [ className =? "Chromium"               --> doShift "II"
+                , className =? "Firefox"                --> doShift "II"
+                , className =? "libreoffice-writer"     --> doShift "III"
+                , className =? "vlc"                    --> doFloat
+                , className =? "Steam"                  --> doCenterFloat
+                , className =? "Tomboy"                 --> doCenterFloat
+                , className =? "Keepasx"                --> doCenterFloat
+                , className =? "trayer"                 --> doIgnore
+                , isFullscreen                          --> (doF W.focusDown <+> doFullFloat)
                 , manageDocks]
 
 myDoFullFloat :: ManageHook
 myDoFullFloat = doF W.focusDown <+> doFullFloat
 
-layoutHook'  =  onWorkspaces ["1"] customLayout $ 
-                customLayout2
+myLayoutHook  =  onWorkspaces ["I"] customLayout $ customLayout2
 
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ defaultPP
@@ -125,7 +122,7 @@ largeXPConfig = mXPConfig
                 , height = 17
                 }
 
-keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
+myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask,                    xK_p        ), runOrRaisePrompt largeXPConfig)
     , ((modMask .|. shiftMask,      xK_Return   ), spawn $ XMonad.terminal conf)    
     , ((modMask .|. shiftMask,      xK_l        ), spawn "slock")
@@ -134,7 +131,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                    xK_s        ), spawn "scrot.sh")
     , ((modMask,                    xK_x        ), spawn "thunar")
     , ((modMask,                    xK_F2       ), spawn "gmrun")
-    , ((modMask,                    xK_o        ), spawn "/usr/bin/libreoffice --writer")
+    , ((modMask,                    xK_o        ), spawn "libreoffice --writer")
     , ((modMask,                    xK_space    ), sendMessage NextLayout)
     , ((modMask .|. shiftMask,      xK_space    ), setLayout $ XMonad.layoutHook conf)
     , ((modMask,                    xK_b        ), sendMessage ToggleStruts)
@@ -145,7 +142,6 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask,      xK_j        ), windows W.swapDown)
     , ((modMask .|. shiftMask,      xK_k        ), windows W.swapUp)
     , ((modMask,                    xK_Return   ), windows W.swapMaster)
-    , ((modMask,                    xK_t        ), withFocused $ windows . W.sink)
     , ((modMask,                    xK_h        ), sendMessage Shrink)
     , ((modMask,                    xK_l        ), sendMessage Expand)
     , ((modMask .|. controlMask,    xK_h        ), sendMessage MirrorShrink)
@@ -153,6 +149,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                    xK_comma    ), sendMessage (IncMasterN 1))
     , ((modMask,                    xK_period   ), sendMessage (IncMasterN (-1)))
     , ((modMask,                    xK_i        ), sendMessage ToggleLayout)
+    , ((modMask,                    xK_F11      ), spawn "xdotool_repeat_key.sh")
+    , ((modMask,                    xK_F12      ), spawn "pkill xdotool")
     , ((modMask .|. controlMask,    xK_Right    ), nextWS)
     , ((modMask .|. shiftMask,      xK_Right    ), shiftToNext)
     , ((modMask .|. controlMask,    xK_Left     ), prevWS)

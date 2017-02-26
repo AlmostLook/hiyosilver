@@ -19,7 +19,7 @@ xsetroot -cursor_name left_ptr &
 #sh /home/x4w3/.screenlayout/resolution.sh &
 
 #notify
-(sleep 5 && trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 12 --height 25 --transparent true --alpha 0 --padding 2 --tint 0x1b1d1e) &
+(sleep 5 && trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 20 --height 25 --transparent true --alpha 0 --padding 2 --tint 0x1b1d1e) &
 
 #mpd /home/x4w3/.mpd/mpd.conf
 xscreensaver -no-splash &
@@ -34,10 +34,10 @@ xfce4-power-manager &
 dropbox &
 xfce4-clipman &
 tomboy &
-orage &
 pidgin &
 mpdstat_pidgin &
 steam &
+sleep 3 && orage &
 
 #play
 exec xmonad
