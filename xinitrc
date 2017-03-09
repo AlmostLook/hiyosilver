@@ -8,12 +8,9 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 #env
-<<<<<<< HEAD
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 #export TZ=:/usr/share/zoneinfo/Europe/Madrid
-=======
 #eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
->>>>>>> a504640dc1af023958e31fc666fbbe1cfeb51b05
 export SSH_AUTH_SOCK
 export LC_ALL="es_ES.UTF-8" &
 setxkbmap -layout es &
