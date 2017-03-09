@@ -9,6 +9,7 @@ fi
 
 #env
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+#export TZ=:/usr/share/zoneinfo/Europe/Madrid
 export SSH_AUTH_SOCK
 export LC_ALL="es_ES.UTF-8" &
 setxkbmap -layout es &
