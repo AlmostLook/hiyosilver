@@ -1,0 +1,15 @@
+set number
+set nowrap
+set textwidth=10000
+set tabstop=4 
+set softtabstop=4
+set showcmd
+"set spell
+"set visualbell
+set encoding=utf-8
+set incsearch
+set hlsearch
+set background=dark
+set t_Co=256
+syntax on
+"colorscheme tango2
