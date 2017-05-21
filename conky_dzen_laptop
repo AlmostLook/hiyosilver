@@ -1,0 +1,9 @@
+conky.config = {
+background = false,
+out_to_console = true,
+out_to_x = false,
+update_interval = 1.0};
+
+conky.text = [[
+^fg(\#ff5f00) ^i(/home/x4w3/.xmonad/dzen2/temp.xbm)^fg(\#FFFFFF) ${execi 60 sensors | grep "temp1:" |cut -d "+" -f2| cut -c1-4} ${execi 60 sudo hddtemp /dev/sda -n} ^fg(\#ff5f00)^i(/home/x4w3/.xmonad/dzen2/cpu.xbm)^fg(\#FFFFFF) ${cpu} ^fg(\#ff5f00)^i(/home/x4w3/.xmonad/dzen2/mem.xbm) ^fg(\#FFFFFF)${memperc} ^fg(\#ff5f00)^i(/home/x4w3/.xmonad/dzen2/net_down_03.xbm)^fg(\#FFFFFF) ${downspeedf wlp16s0} ^fg(\#ff5f00)^i(/home/x4w3/.xmonad/dzen2/net_up_03.xbm) ^fg(\#FFFFFF)${upspeedf wlp16s0} ^fg(\#ff5f00) ^fg(\#ff5f00)^i(/home/x4w3/.xmonad/dzen2/battery80.xbm)^fg(\#FFFFFF) ${execi 15 /home/x4w3/battery.sh}% ^fg(\#ff5f00) ^i(/home/x4w3/.xmonad/dzen2/clock.xbm)^fg(\#FFFFFF) ${time %H:%M}
+]];
