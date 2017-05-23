@@ -126,6 +126,7 @@ largeXPConfig = mXPConfig
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask,                    xK_p        ), runOrRaisePrompt largeXPConfig)
+    , ((modMask .|. controlMask,    xK_n        ), appendFilePrompt def "/home/n3w4x/notas.txt")
     , ((modMask .|. shiftMask,      xK_Return   ), spawn $ XMonad.terminal conf)    
     , ((modMask .|. shiftMask,      xK_l        ), spawn "slock")
     , ((modMask,                    xK_c        ), spawn "chromium https://mail.google.com/")
