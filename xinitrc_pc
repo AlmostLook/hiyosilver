@@ -11,6 +11,7 @@ fi
 #eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 export LC_ALL="es_ES.UTF-8" &
+export EDITOR="vim"
 setxkbmap -layout es &
 xsetroot -cursor_name left_ptr &
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
