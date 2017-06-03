@@ -1,34 +1,35 @@
 --MY PERSONAL CONFIG--
 import XMonad
-import XMonad.Prompt
-import XMonad.Prompt.RunOrRaise (runOrRaisePrompt)
-import XMonad.Prompt.AppendFile (appendFilePrompt)
-import XMonad.Operations
-import System.IO
-import System.Exit
-import XMonad.Util.Run
-import XMonad.Actions.CycleWS
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.SetWMName
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.UrgencyHook
-import XMonad.Hooks.FadeInactive
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Layout.NoBorders (noBorders, smartBorders)
-import XMonad.Layout.PerWorkspace (onWorkspace, onWorkspaces)
-import XMonad.Layout.Reflect (reflectHoriz)
-import XMonad.Layout.IM
-import XMonad.Layout.SimpleFloat
-import XMonad.Layout.Spacing
-import XMonad.Layout.ResizableTile
-import XMonad.Layout.LayoutHints
-import XMonad.Layout.LayoutModifier
-import XMonad.Layout.Grid
-import XMonad.Layout.ToggleLayouts
-import Data.Ratio ((%))
-import qualified XMonad.StackSet as W
-import qualified Data.Map as M
+import XMonad.Prompt --menú instrucciones gráficas para xmonad. modmask+p, no incluye shell
+import XMonad.Prompt.RunOrRaise (runOrRaisePrompt) --abrir menu modmask+p
+import XMonad.Prompt.AppendFile (appendFilePrompt) --gestor de notas modmask+control+n
+import XMonad.Operations -- operaciones con ventanas, matar ventana, refrescar, ...
+
+import System.IO --IO xmonad, ficheros y handles
+import System.Exit --Salir programas, flushear handles, Exception, ExitCode
+import XMonad.Util.Run --Comandos para Dzen, Dmenu, Xterm
+import XMonad.Actions.CycleWS --focus ventanas, moverse entre ellas
+import XMonad.Hooks.ManageDocks --avoidStruts, Dzen, xmobar, gnome-panel
+import XMonad.Hooks.ManageHelpers --auxiliar ManageDocks, floating, fullscreen
+import XMonad.Hooks.SetWMName --WM name=LG3D use Java 1.6u1, compatibilidad GUI Java 
+import XMonad.Hooks.DynamicLog --statusBar Xmonad y Dzen
+import XMonad.Hooks.UrgencyHook --para acciones cuando ventana requiere atención
+import XMonad.Hooks.FadeInactive --opacidad ventanas inactivas -  xcompmgr 
+import XMonad.Hooks.EwmhDesktops --EWMH para X
+import XMonad.Layout.NoBorders (noBorders, smartBorders) --quitar bordes a pantalla completa
+import XMonad.Layout.PerWorkspace (onWorkspace, onWorkspaces) --diferenciar layouts en workspaces
+import XMonad.Layout.Reflect (reflectHoriz) --refleccion horizantal en layouts
+import XMonad.Layout.IM --ajuste layout para Psi o Tkabber
+import XMonad.Layout.SimpleFloat --diseño flotante basico
+import XMonad.Layout.Spacing --espacio configurable alrededor de los layouts
+import XMonad.Layout.ResizableTile --formato mosaico que permite cambiar altura/anchura de layouts
+import XMonad.Layout.LayoutHints --respetar el tamaño
+import XMonad.Layout.LayoutModifier --piratear layouts con modificaciones extras
+import XMonad.Layout.Grid --diseño de layout que pone todas las ventanas en una misma cuadricula
+import XMonad.Layout.ToggleLayouts --modulo para alternar entre los layouts
+import Data.Ratio ((%)) --modulo operaciones matematicas con numeros racionales
+import qualified XMonad.StackSet as W --workspaces y focos
+import qualified Data.Map as M --diccionarios
 
 myTerminal = "urxvt"
 myModMask :: KeyMask
@@ -41,7 +42,7 @@ myBitmapDir = "/home/n3w4x/.xmonad/dzen2"
 main = do
     dzenLeftBar <- spawnPipe myXmonadBar
     dzenRightBar <- spawnPipe myStatusBar
-    xmonad $ withUrgencyHookC dzenUrgencyHook { args = ["-bg", "red", "fg", "black", "-xs", "1", "-y", "25"] } urgencyConfig { remindWhen = Every 5 } $ defaultConfig
+    xmonad $ withUrgencyHookC dzenUrgencyHook { args = ["-bg", "red", "fg", "black", "-xs", "1", "-y", "25"] } urgencyConfig { remindWhen = Every 5 } $ ewmh defaultConfig
       { terminal            = myTerminal
       , workspaces          = myWorkspaces
       , keys                = myKeys
@@ -62,10 +63,9 @@ myManageHook = composeAll
                 , className =? "libreoffice-writer"     --> doShift "III"
                 , className =? "Pidgin"                 --> doShift "V"
                 , className =? "vlc"                    --> doFloat
-                , className =? "thunar"                 --> doFloat
                 , className =? "Steam"                  --> doCenterFloat
                 , className =? "Tomboy"                 --> doCenterFloat
-                , className =? "Keepasx"                --> doCenterFloat
+                , className =? "Keepas"                 --> doCenterFloat
                 , className =? "trayer"                 --> doIgnore
                 , isFullscreen                          --> (doF W.focusDown <+> doFullFloat)
                 , manageDocks]
@@ -125,16 +125,25 @@ largeXPConfig = mXPConfig
                 }
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
-    [ ((modMask,                    xK_p        ), runOrRaisePrompt largeXPConfig)
-    , ((modMask .|. controlMask,    xK_n        ), appendFilePrompt def "/home/n3w4x/notas.txt")
-    , ((modMask .|. shiftMask,      xK_Return   ), spawn $ XMonad.terminal conf)    
+--TECLAS DE PROGRAMAS
+    [ ((modMask .|. controlMask,    xK_F1       ), appendFilePrompt def "/home/n3w4x/notas.txt")
+    , ((modMask .|. controlMask,    xK_F11      ), spawn "xdotool_repeat_key.sh")
+    , ((modMask .|. controlMask,    xK_F12      ), spawn "pkill xdotool")
+    , ((modMask .|. controlMask,    xK_Return   ), spawn $ XMonad.terminal conf)    
+    , ((modMask .|. controlMask,    xK_c        ), spawn "chromium about:blank")
+    , ((modMask .|. controlMask,    xK_f        ), spawn "firefox -private-window")
+    , ((modMask .|. controlMask,    xK_s        ), spawn "scrot.sh")
+    , ((modMask .|. controlMask,    xK_t        ), spawn "thunar")
+    , ((modMask .|. controlMask,    xK_F2       ), spawn "gmrun")
+    , ((modMask .|. controlMask,    xK_o        ), spawn "libreoffice --writer")
+    , ((modMask .|. controlMask,    xK_r        ), spawn "urxvt -e ncmpcpp")
+    , ((modMask .|. controlMask,    xK_m        ), spawn "urxvt -e mutt")
+    , ((modMask .|. controlMask,    xK_k        ), spawn "keepass")
+    , ((modMask .|. controlMask,    xK_w        ), spawn "whatsie")
+    , ((modMask .|. controlMask,    xK_n        ), spawn "mousepad")
+--TECLAS INTERNAS
+    ,((modMask,                     xK_p        ), runOrRaisePrompt largeXPConfig)
     , ((modMask .|. shiftMask,      xK_l        ), spawn "slock")
-    , ((modMask,                    xK_c        ), spawn "chromium https://mail.google.com/")
-    , ((modMask,                    xK_f        ), spawn "firefox")
-    , ((modMask,                    xK_s        ), spawn "scrot.sh")
-    , ((modMask,                    xK_x        ), spawn "thunar")
-    , ((modMask,                    xK_F2       ), spawn "gmrun")
-    , ((modMask,                    xK_o        ), spawn "libreoffice --writer")
     , ((modMask,                    xK_space    ), sendMessage NextLayout)
     , ((modMask .|. shiftMask,      xK_space    ), setLayout $ XMonad.layoutHook conf)
     , ((modMask,                    xK_b        ), sendMessage ToggleStruts)
@@ -147,18 +156,16 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                    xK_Return   ), windows W.swapMaster)
     , ((modMask,                    xK_h        ), sendMessage Shrink)
     , ((modMask,                    xK_l        ), sendMessage Expand)
-    , ((modMask .|. controlMask,    xK_h        ), sendMessage MirrorShrink)
-    , ((modMask .|. controlMask,    xK_l        ), sendMessage MirrorExpand)
+    , ((modMask .|. shiftMask,      xK_h        ), sendMessage MirrorShrink)
+    , ((modMask .|. shiftMask,      xK_l        ), sendMessage MirrorExpand)
     , ((modMask,                    xK_comma    ), sendMessage (IncMasterN 1))
     , ((modMask,                    xK_period   ), sendMessage (IncMasterN (-1)))
     , ((modMask,                    xK_i        ), sendMessage ToggleLayout)
-    , ((modMask,                    xK_F11      ), spawn "xdotool_repeat_key.sh")
-    , ((modMask,                    xK_F12      ), spawn "pkill xdotool")
-    , ((modMask .|. controlMask,    xK_Right    ), nextWS)
+    , ((modMask,                    xK_Right    ), nextWS)
     , ((modMask .|. shiftMask,      xK_Right    ), shiftToNext)
-    , ((modMask .|. controlMask,    xK_Left     ), prevWS)
+    , ((modMask,                    xK_Left     ), prevWS)
     , ((modMask .|. shiftMask,      xK_Left     ), shiftToPrev)
-    , ((modMask .|. controlMask,    xK_r        ), spawn "sleep 3 && systemctl reboot")
+    , ((modMask .|. shiftMask,      xK_r        ), spawn "sleep 3 && systemctl reboot")
     , ((modMask .|. shiftMask,      xK_c        ), kill)
     , ((modMask .|. shiftMask,      xK_q        ), io (exitWith ExitSuccess))
     , ((modMask,                    xK_q        ), spawn "pkill conky && killall dzen2 && xmonad --recompile && xmonad --restart")
