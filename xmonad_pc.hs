@@ -35,8 +35,8 @@ myTerminal = "urxvt"
 myModMask :: KeyMask
 myModMask = mod4Mask
 myWorkspaces = ["^i(" ++ myBitmapDir ++ "/arch_10x10.xbm)" , "II", "III"] ++ ["IV", "V"]
-myXmonadBar = "dzen2 -x '0' -y '0' -h '25' -w '450' -ta 'l' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -fg '#ffffff' -bg '#1B1D1E' -e 'button'"
-myStatusBar = "conky -c /home/n3w4x/.xmonad/.conky_dzen | dzen2 -x '450' -y '0' -w '1240' -h '25' -ta 'r' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -bg '#1B1D1E' -fg '#ffffff' -e 'button'"
+myXmonadBar = "dzen2 -x '0' -y '0' -h '25' -w '450' -ta 'l' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -fg '#d3dae3' -bg '#383c4a' -e 'button'"
+myStatusBar = "conky -c /home/n3w4x/.xmonad/.conky_dzen | dzen2 -x '450' -y '0' -w '1240' -h '25' -ta 'r' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -bg '#383c4a' -fg '#d3dae3' -e 'button'"
 myBitmapDir = "/home/n3w4x/.xmonad/dzen2"
 
 main = do
@@ -50,7 +50,7 @@ main = do
       , layoutHook          = myLayoutHook
       , manageHook          = manageDocks <+> myManageHook <+> manageHook defaultConfig
       , logHook             = myLogHook dzenLeftBar >> fadeInactiveLogHook 0xdddddddd
-      , normalBorderColor   = "#000000"
+      , normalBorderColor   = "#383c4a"
       , focusedBorderColor  = "#ff5f00" 
       , borderWidth         = 1
       , startupHook         = setWMName "LG3D"
@@ -60,6 +60,7 @@ myManageHook :: ManageHook
 myManageHook = composeAll
                 [ className =? "Chromium"               --> doShift "II"
                 , className =? "Firefox"                --> doShift "II"
+                , className =? "Evince"                 --> doCenterFloat
                 , className =? "libreoffice-writer"     --> doShift "III"
                 , className =? "Pidgin"                 --> doShift "V"
                 , className =? "vlc"                    --> doFloat
@@ -78,14 +79,14 @@ myLayoutHook  =  onWorkspaces ["I"] customLayout $ customLayout2
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ defaultPP
     {
-        ppCurrent           =   dzenColor "#ff5f00" "#1B1D1E" . pad
-      , ppVisible           =   dzenColor "white" "#1B1D1E" . pad
-      , ppHidden            =   dzenColor "white" "#1B1D1E" . pad
-      , ppHiddenNoWindows   =   dzenColor "#7b7b7b" "#1B1D1E" . pad
+        ppCurrent           =   dzenColor "#ff5f00" "#383c4a" . pad
+      , ppVisible           =   dzenColor "d3dae3" "#383c4a" . pad
+      , ppHidden            =   dzenColor "d3dae3" "#383c4a" . pad
+      , ppHiddenNoWindows   =   dzenColor "#7b7b7b" "#383c4a" . pad
       , ppUrgent            =   dzenColor "black" "red" . pad
       , ppWsSep             =   ""
       , ppSep               =   " "
-      , ppLayout            =   dzenColor "#ff5f00" "#1B1D1E" .
+      , ppLayout            =   dzenColor "#ff5f00" "#383c4a" .
                                 (\x -> case x of
                                     "ResizableTall"             ->      "^i(" ++ myBitmapDir ++ "/tall.xbm)"
                                     "Mirror ResizableTall"      ->      "^i(" ++ myBitmapDir ++ "/mtall.xbm)"
@@ -93,7 +94,7 @@ myLogHook h = dynamicLogWithPP $ defaultPP
                                     "Simple Float"              ->      "~"
                                     _                           ->      x
                                 )
-      , ppTitle             =   (" " ++) . dzenColor "white" "#1B1D1E" . dzenEscape
+      , ppTitle             =   (" " ++) . dzenColor "d3dae3" "#383c4a" . dzenEscape
       , ppOutput            =   hPutStrLn h
     }
 
@@ -109,10 +110,10 @@ mXPConfig :: XPConfig
 mXPConfig =
     defaultXPConfig { font                  = "xft:inconsolata-16"
  
-                    , bgColor               = "#2b2d2e"
+                    , bgColor               = "#383c4a"
                     , fgColor               = "#ff5f00"
                     , bgHLight              = "#ff5f00"
-                    , fgHLight              = "#1B1D1E"
+                    , fgHLight              = "#383c4a"
                     , promptBorderWidth     = 0
                     , height                = 17
                     , historyFilter         = deleteConsecutive

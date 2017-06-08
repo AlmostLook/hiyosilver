@@ -1,0 +1,58 @@
+!General
+URxvt.title:				rxvt-unicode
+URxvt.termName:				rxvt-256color
+URxvt.buffered:				true
+URxvt.saveLines:			1024
+URxvt.scrollBar:			false
+URxvt.scrollstyle:			rxvt
+URxvt.transparent:			true
+URxvt.shading:				100
+URxvt.urgentOnBell:			true
+URxvt.cursorBlink:			true
+URxvt.inheritPixmap:		true
+URxvt.intensityStyles: 		true
+URxvt.perl-ext-common:		default,url-select,clipboard
+URxvt.url-select.launcher:  chromium
+URxvt.url-select.underline: true
+URxvt.keysym.M-c:			perl:clipboard:copy
+URxvt.keysym.M-v:			perl:clipboard:paste
+URxvt.keysym.M-u:           perl:url-select:select_next
+URxvt.keysym.M-Escape:      perl:keyboard-select:activate
+URxvt.keysym.M-s:           perl:keyboard-select:search
+URxvt.underlineURLs:		true
+URxvt.urlButton:			1
+URxvt.internalBorder:		10
+!Personal
+URxvt.letterSpace:			0
+URxvt.font:					xft:Inconsolata-14
+URxvt.boldFont:				xft:Inconsolata:bold-14
+URxvt.background:       	#383c4a
+URxvt.foreground:       	#d3dae3
+URxvt.cursorColor:      	#ff5f00
+URxvt.underlineColor:   	#ff5f00
+
+ncmpcpp.depth:            32 
+ncmpcpp.dynamicColors: on
+ncmpcpp.font: xft:Inconsolata:size=14
+ncmpcpp.scrollstyle: plain
+ncmpcpp.background: [90]#1b1d1e
+ncmpcpp.color0: #1b1d1e
+ncmpcpp.color1: #6092a0
+ncmpcpp.color2: #447ca0
+ncmpcpp.color3: #e04857
+ncmpcpp.color4: #a06772
+ncmpcpp.color5: #a28c81
+ncmpcpp.color6: #c47769
+ncmpcpp.foreground: #ff5f00
+ncmpcpp.color7: #4a65a0
+ncmpcpp.white: #602e31
+ncmpcpp.color9: #5486c8
+ncmpcpp.color10: #fad5a7
+ncmpcpp.color11: #f2726b
+ncmpcpp.color12: #c89cc0
+ncmpcpp.color13: #c1c8c8
+ncmpcpp.color14: #f6b58d
+ncmpcpp.colorBD: #6285c8
+ncmpcpp.color15: #6285c8
+
+
