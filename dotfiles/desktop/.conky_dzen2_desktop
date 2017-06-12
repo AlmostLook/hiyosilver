@@ -1,0 +1,10 @@
+conky.config = {
+background = false,
+out_to_console = true,
+out_to_x = false,
+update_interval = 1.0};
+
+conky.text = [[
+	^fg(\#ff5f00) ^i(/home/n3w4x/.xmonad/dzen2/clock.xbm) ^fg(\#d3dae3) ${execi 30 /home/n3w4x/weather.sh "EUR|ES|AN|seville"}                            
+	^fg(\#ff5f00)^r(2x20) ${mpd_status} ^i(/home/n3w4x/.xmonad/dzen2/music.xbm) ^fg(\#d3dae3)${mpd_artist}^fg(\#ff5f00) - ^fg(\#d3dae3)${mpd_title}^fg(\#ff5f00) ^fg(\#808080)${mpd_elapsed}/^fg(\#808080)${mpd_length}^fg(\#ff5f00) ^r(2x20)
+]];
