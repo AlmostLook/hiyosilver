@@ -37,11 +37,13 @@ myModMask = mod4Mask
 myWorkspaces = ["^i(" ++ myBitmapDir ++ "/arch_10x10.xbm)" , "II", "III"] ++ ["IV", "V"]
 myXmonadBar = "dzen2 -x '0' -y '0' -h '25' -w '450' -ta 'l' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -fg '#d3dae3' -bg '#383c4a' -e 'button'"
 myStatusBar = "conky -c /home/n3w4x/.xmonad/.conky_dzen | dzen2 -x '450' -y '0' -w '1240' -h '25' -ta 'r' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -bg '#383c4a' -fg '#d3dae3' -e 'button'"
+myStatusBar2 = "conky -c /home/n3w4x/.xmonad/.conky_dzen2 | dzen2 -x '0' -y '1200' -w '1200' -h '25' -ta 'r' -fn '-*-inconsolata-*-r-normal-*-*-140-*-*-*-*-iso8859-*' -bg '#383c4a' -fg '#d3dae3' -e 'button'"
 myBitmapDir = "/home/n3w4x/.xmonad/dzen2"
 
 main = do
     dzenLeftBar <- spawnPipe myXmonadBar
     dzenRightBar <- spawnPipe myStatusBar
+    dzenDownBar <- spawnPipe myStatusBar2
     xmonad $ withUrgencyHookC dzenUrgencyHook { args = ["-bg", "red", "fg", "black", "-xs", "1", "-y", "25"] } urgencyConfig { remindWhen = Every 5 } $ ewmh defaultConfig
       { terminal            = myTerminal
       , workspaces          = myWorkspaces
@@ -58,13 +60,15 @@ main = do
 
 myManageHook :: ManageHook
 myManageHook = composeAll
-                [ className =? "Chromium"               --> doShift "II"
-                , className =? "Firefox"                --> doShift "II"
+                [ className =? "Chromium"               --> doShift "IV"
+                , className =? "Firefox"                --> doShift "IV"
                 , className =? "Evince"                 --> doCenterFloat
+                , className =? "xfce4-notify-config"    --> doCenterFloat
                 , className =? "libreoffice-writer"     --> doShift "III"
+                , className =? "subl3"                  --> doShift "III"
                 , className =? "Pidgin"                 --> doShift "V"
                 , className =? "vlc"                    --> doFloat
-                , className =? "Steam"                  --> doCenterFloat
+                , className =? "Steam"                  --> doFullFloat
                 , className =? "Tomboy"                 --> doCenterFloat
                 , className =? "Keepas"                 --> doCenterFloat
                 , className =? "trayer"                 --> doIgnore
@@ -141,7 +145,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. controlMask,    xK_m        ), spawn "urxvt -e mutt")
     , ((modMask .|. controlMask,    xK_k        ), spawn "keepass")
     , ((modMask .|. controlMask,    xK_w        ), spawn "whatsie")
-    , ((modMask .|. controlMask,    xK_n        ), spawn "mousepad")
+    , ((modMask .|. controlMask,    xK_n        ), spawn "subl3")
 --TECLAS INTERNAS
     ,((modMask,                     xK_p        ), runOrRaisePrompt largeXPConfig)
     , ((modMask .|. shiftMask,      xK_l        ), spawn "slock")
