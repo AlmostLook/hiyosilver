@@ -1,0 +1,6 @@
+#LS DIRCOLORS
+[[ $- != *i* ]] && return
+eval "`dircolors -b ~/.dircolors`"
+alias ls='ls --color=auto --file-type'
+
+PS1='\[\e[31m\][root]\[\033[01;38;5;202m\] \W \$\[\e[0m\] '
