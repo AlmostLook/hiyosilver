@@ -3,4 +3,10 @@
 eval "`dircolors -b ~/.dircolors`"
 alias ls='ls --color=auto --file-type'
 
+#################LS EJECUTABLES
+function lsx() { 
+find "$@" -maxdepth 1 -perm -ugo+x -type f 
+}
+
+
 PS1='\[\e[31m\][root]\[\033[01;38;5;202m\] \W \$\[\e[0m\] '
